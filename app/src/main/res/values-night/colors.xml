@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary_text_color">#000000</color>
+    <color name="primary_text_color">#FFFFFF</color>
+    <color name="secondary_text_color">#000000</color>
+
+    <color name="whatsapp_green">#128C7E</color>
 </resources>
