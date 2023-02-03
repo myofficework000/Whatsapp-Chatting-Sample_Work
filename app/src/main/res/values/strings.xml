@@ -1,9 +1,11 @@
 <resources>
     <string name="app_name">WhatsappFeatureApp</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="toolbarOptionsPlaceHolderTitle">Placeholder</string>
     <string name="tabLayoutTitle_Chat">Chat</string>
     <string name="tabLayoutTitle_Call">Call</string>
     <string name="tabLayoutTitle_Status">Status</string>
+    <string name="mess1">Hey! How is it going ?</string>
+    <string name="messCount">1</string>
+    <string name="time">15:25</string>
 </resources>
