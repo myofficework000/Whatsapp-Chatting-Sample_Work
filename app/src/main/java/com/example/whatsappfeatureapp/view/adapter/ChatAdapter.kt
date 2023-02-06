@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.whatsappfeatureapp.R
 import com.example.whatsappfeatureapp.databinding.ChatItemBinding
 import com.example.whatsappfeatureapp.model.Chat
 
@@ -26,6 +27,18 @@ class ChatAdapter(private val chats: List<Chat>):  RecyclerView.Adapter<ChatAdap
                 binding.apply{
                     userName.text = username
                     userMessage.text = message
+                    messCount.text = messageCount
+                    senderImage.setImageResource(senderIcon)
+                    if(isPinned){
+                        pinIcon.setImageResource(R.drawable.baseline_push__pinned_pin_24)
+                    }else{
+                        pinIcon.setImageResource(R.drawable.baseline_push_pin_24)
+                    }
+                    if(isMuted){
+                        muteIcon.setImageResource(R.drawable.baseline_volume_off_24)
+                    }else{
+                        muteIcon.setImageResource(R.drawable.baseline_volume_up_24)
+                    }
                 }
             }
         }
