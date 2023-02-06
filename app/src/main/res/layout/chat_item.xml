@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:padding="@dimen/_20dp">
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardImage"
         android:layout_width="@dimen/_50dp"
         android:layout_height="@dimen/_50dp"
         android:elevation="@dimen/_20dp"
