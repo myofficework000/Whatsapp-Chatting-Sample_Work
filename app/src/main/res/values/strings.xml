@@ -5,7 +5,8 @@
     <string name="tabLayoutTitle_Chat">Chat</string>
     <string name="tabLayoutTitle_Call">Call</string>
     <string name="tabLayoutTitle_Status">Status</string>
-    <string name="mess1">Hey! How is it going ?</string>
+    <string name="chatMessage">message</string>
     <string name="messCount">1</string>
     <string name="time">15:25</string>
+    <string name="name">Name</string>
 </resources>
