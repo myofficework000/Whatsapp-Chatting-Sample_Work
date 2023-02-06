@@ -19,6 +19,7 @@ class ChatFragment : Fragment() {
     
     // Placeholder changes. Feel free to revert or reformat on merge
     private lateinit var binding: FragmentChatBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
