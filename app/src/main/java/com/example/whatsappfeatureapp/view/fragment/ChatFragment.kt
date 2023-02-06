@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.whatsappfeatureapp.R
@@ -13,31 +15,36 @@ import com.example.whatsappfeatureapp.model.Chat
 import com.example.whatsappfeatureapp.model.ChatDataSource
 import com.example.whatsappfeatureapp.view.adapter.ChatAdapter
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-private lateinit var binding : FragmentChatBinding
-private lateinit var recyclerView: RecyclerView
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ChatFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ChatFragment : Fragment() {
+    
+    // Placeholder changes. Feel free to revert or reformat on merge
+    private lateinit var binding: FragmentChatBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_chat, container, false)
-    }
+    ): View = FragmentChatBinding.inflate(inflater, container, false).apply {
+        binding = this
+    }.root
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val layoutManager = LinearLayoutManager(context)
-        recyclerView = view.findViewById(R.id.recyclerView)
-        binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = ChatAdapter(ChatDataSource.getChatList())
+
+        binding.recyclerView.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = ChatAdapter(
+                ChatDataSource.getChatList(),
+                ::gotoDetail
+            )
+        }
+
+        binding.placeholderButtonGotoChatDetail.setOnClickListener {
+            gotoDetail(0)
+        }
+    }
+
+    fun gotoDetail(chatId: Long) {
+        ChatDetailFragment().apply {
+            setStyle(DialogFragment.STYLE_NORMAL, R.style.FullScreenDialog)
+        }.show((context as AppCompatActivity).supportFragmentManager, "")
     }
 }
