@@ -8,7 +8,10 @@ import com.example.whatsappfeatureapp.R
 import com.example.whatsappfeatureapp.databinding.ChatItemBinding
 import com.example.whatsappfeatureapp.model.Chat
 
-class ChatAdapter(private val chats: List<Chat>):  RecyclerView.Adapter<ChatAdapter.ChatViewsHolder>() {
+class ChatAdapter(
+    private val chats: List<Chat>,
+    private val gotoDetailFunc: (Long) -> Unit
+):  RecyclerView.Adapter<ChatAdapter.ChatViewsHolder>() {
     private lateinit var binding: ChatItemBinding
 
     override fun getItemCount() = chats.size
@@ -18,9 +21,12 @@ class ChatAdapter(private val chats: List<Chat>):  RecyclerView.Adapter<ChatAdap
         binding = ChatItemBinding.inflate(layoutinflater,parent, false)
         return ChatViewsHolder(binding.root)
     }
-    override fun onBindViewHolder(holder: ChatViewsHolder, position: Int) {
-        holder.bind(chats[position])
-    }
+    override fun onBindViewHolder(holder: ChatViewsHolder, position: Int) = holder.apply {
+        holder.itemView.setOnClickListener {
+            gotoDetailFunc(0)
+        }
+    }.bind(chats[position])
+
     inner class ChatViewsHolder(view: View): RecyclerView.ViewHolder(view){
         fun bind(chat: Chat){
             chat.apply{

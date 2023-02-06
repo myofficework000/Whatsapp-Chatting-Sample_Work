@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <solid android:color="#7BAE6E"/>
+            <corners
+                android:topLeftRadius="@dimen/chat_bubble_corner_radius"
+                android:bottomLeftRadius="@dimen/chat_bubble_corner_radius"
+                android:bottomRightRadius="@dimen/chat_bubble_corner_radius"/>
+        </shape>
+    </item>
+    <item android:state_pressed="false">
+        <shape android:shape="rectangle">
+            <solid android:color="#708F3F"/>
+            <corners
+                android:topLeftRadius="@dimen/chat_bubble_corner_radius"
+                android:bottomLeftRadius="@dimen/chat_bubble_corner_radius"
+                android:bottomRightRadius="@dimen/chat_bubble_corner_radius"/>
+        </shape>
+    </item>
+</selector>
