@@ -8,4 +8,5 @@ data class Chat(
     val time:String,
     val messageCount:String,
     val isPinned:Boolean,
+    val isMuted: Boolean,
     @DrawableRes val senderIcon:Int)

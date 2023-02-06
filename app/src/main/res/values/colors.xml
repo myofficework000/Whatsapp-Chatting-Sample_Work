@@ -11,4 +11,5 @@
     <color name="secondary_text_color">#000000</color>
     <color name="whatsapp_green">#128C7E</color>
     <color name="message_count">#17ED20</color>
+    <color name="pinned_message">#17ED20</color>
 </resources>
