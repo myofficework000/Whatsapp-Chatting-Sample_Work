@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.whatsappfeatureapp.ChatDetailViewModel
 import com.example.whatsappfeatureapp.R
 import com.example.whatsappfeatureapp.databinding.FragmentChatDetailBinding
 import com.example.whatsappfeatureapp.model.AccountInfo
@@ -15,10 +17,10 @@ import com.example.whatsappfeatureapp.model.ChatDataSource.placeholderMinePhoneN
 import com.example.whatsappfeatureapp.model.ChatDetail
 import com.example.whatsappfeatureapp.view.adapter.ChatDetailAdapter
 import com.google.android.material.divider.MaterialDividerItemDecoration
-import java.time.LocalDateTime
 
 class ChatDetailFragment : DialogFragment() {
     private lateinit var binding: FragmentChatDetailBinding
+    private lateinit var chatDetailViewModel: ChatDetailViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,27 +31,14 @@ class ChatDetailFragment : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        binding.chatView.apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter = ChatDetailAdapter(
-                ChatDataSource.chatDetail1,
-                ::checkMinePhoneNumber,
-                ::getAccountInfo,
-                ::removeMessage
-            )
-            addItemDecoration(
-                MaterialDividerItemDecoration(context, RecyclerView.VERTICAL).apply {
-                    dividerThickness = resources.getDimension(R.dimen.chat_row_divider_thickness).toInt()
-                }
-            )
-        }
+        setUpViewModelStuffs()
 
         binding.sendMessageButton.setOnClickListener {
             binding.newMessageInput.apply {
                 if (text?.isNotBlank() == true) {
                     sendMessage(
                         ChatDetail(
+                            "",
                             placeholderMinePhoneNumber,
                             text.toString(),
                             "1/1"
@@ -61,17 +50,42 @@ class ChatDetailFragment : DialogFragment() {
         }
     }
 
+    private fun setUpViewModelStuffs() {
+        chatDetailViewModel = ViewModelProvider(this)[ChatDetailViewModel::class.java]
+        chatDetailViewModel.fetchNotes()
+        chatDetailViewModel.allChats.observe(this.viewLifecycleOwner) {
+            binding.chatView.apply {
+                layoutManager = LinearLayoutManager(context)
+                adapter = ChatDetailAdapter(
+                    it,
+                    ::checkMinePhoneNumber,
+                    ::getAccountInfo,
+                    ::removeMessage
+                )
+                addItemDecoration(
+                    MaterialDividerItemDecoration(context, RecyclerView.VERTICAL).apply {
+                        dividerThickness =
+                            resources.getDimension(R.dimen.chat_row_divider_thickness).toInt()
+                    }
+                )
+            }
+        }
+    }
+
     private fun checkMinePhoneNumber(num: Long): Boolean = num == placeholderMinePhoneNumber
     private fun getAccountInfo(num: Long): AccountInfo? = ChatDataSource.placeholderAccounts[num]
 
-    private fun removeMessage(index: Int) {
-        ChatDataSource.chatDetail1.removeAt(index)
-        binding.chatView.adapter?.notifyItemRemoved(index)
+    private fun removeMessage(chatDetail: ChatDetail) {
+       /* ChatDataSource.chatDetail1.removeAt(index)
+
+        binding.chatView.adapter?.notifyItemRemoved(index)*/
+
+        chatDetailViewModel.deleteChat(chatDetail)
     }
 
     private fun sendMessage(data: ChatDetail) = binding.chatView.apply {
-        ChatDataSource.chatDetail1.add(data)
-        adapter?.notifyItemInserted(ChatDataSource.chatDetail1.size-1)
+        chatDetailViewModel.addMoreChats(data)
+        //adapter?.notifyItemInserted(ChatDataSource.chatDetail1.size - 1)
     }
 
     companion object {

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "618316099378",
+    "project_id": "simplewatsapp",
+    "storage_bucket": "simplewatsapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:618316099378:android:5993566c54b789d8f4312b",
+        "android_client_info": {
+          "package_name": "com.example.whatsappfeatureapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "618316099378-javq4frs00830hh0p4lpqnod5qotp4tr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClQe36xyp4Pt_lSK4JSVQ7h1q7881oius"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "618316099378-javq4frs00830hh0p4lpqnod5qotp4tr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

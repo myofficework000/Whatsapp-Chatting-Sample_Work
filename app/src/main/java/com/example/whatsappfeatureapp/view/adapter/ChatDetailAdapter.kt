@@ -16,7 +16,7 @@ class ChatDetailAdapter(
     private val itemList: List<ChatDetail>,
     private val checkMineFunc: (Long) -> Boolean,
     private val getAccountInfoFunc: (Long) -> AccountInfo?,
-    private val removeMessageFunc: (Int) -> Unit
+    private val removeMessageFunc: (ChatDetail) -> Unit
 ): RecyclerView.Adapter<ChatDetailAdapter.ChatBubbleBase>() {
     private lateinit var binding: ChatRowOthersBinding
     private lateinit var bindingMine: ChatRowMineBinding
@@ -28,7 +28,7 @@ class ChatDetailAdapter(
     }
 
     inner class ChatBubbleOthers(view: View): ChatBubbleBase(view) {
-        override fun bind (item: ChatDetail) {
+        override fun bind (item: ChatDetail)  {
             binding.chatBubbleContentOthers.text = item.message
             binding.chatBubbleDateOthers.text = item.time
             getAccountInfoFunc(item.userPhoneNumber)?.apply {
@@ -80,7 +80,7 @@ class ChatDetailAdapter(
                 setOnMenuItemClickListener { item ->
                     when (item.itemId) {
                         R.id.chatBubbleOptionsMineDelete -> {
-                            removeMessageFunc(position)
+                            removeMessageFunc(itemList[position])
                             Snackbar.make(it, "Message deleted.", Snackbar.LENGTH_SHORT).show()
                         }
                         R.id.chatBubbleOptionsOtherInfo -> {
